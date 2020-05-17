@@ -11,7 +11,6 @@ export class LoginGuard implements CanActivate {
     canActivate(route: import("@angular/router").ActivatedRouteSnapshot, state: import("@angular/router").RouterStateSnapshot): boolean | import("@angular/router").UrlTree | import("rxjs").Observable<boolean | import("@angular/router").UrlTree> | Promise<boolean | import("@angular/router").UrlTree> {
         console.log(route);
         if (!this.authService.Loggedin()) {
-            alert('请先登录！');
         }
         return this.authService.Loggedin();
     }

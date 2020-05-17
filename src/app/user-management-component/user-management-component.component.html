@@ -1,1 +1,39 @@
-<p>user-management-component works!</p>
+<form [formGroup]="myForm">
+    <h2>用户管理</h2>
+    <div class="form-group">
+        <label for="id">学号</label>
+        <input type="text" class="form-control" id="id" name="id" [formControl]='id'>
+    </div>
+    <div class="form-group">
+        <label for="userName">学生姓名</label>
+        <input type="text" class="form-control" id="userName" name="userName" [formControl]='userName'>
+    </div>
+    <div class="form-group">
+        <label for="password">学生成绩</label>
+        <input type="number" class="form-control" id="password" name="password" [formControl]='password'>
+    </div>
+</form>
+<div>
+    <button type="button" class="btn btn-primary" (click)="search()">查询</button>
+    <button type="button" class="btn btn-success" (click)="add()">添加</button>
+    <button type="button" class="btn btn-danger" (click)="delete()">删除</button>
+    <button type="button" class="btn btn-warning" (click)="update()">修改</button>
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">学号</th>
+            <th scope="col">学生姓名</th>
+            <th scope="col">学生成绩</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor='let user of users$ | async;let i = index' (click)="select(user)">
+            <th scope="row">{{i}}</th>
+            <td>{{user.id}}</td>
+            <td>{{user.userName}}</td>
+            <td>{{user.password}}</td>
+        </tr>
+    </tbody>
+</table>
