@@ -3,6 +3,7 @@ import { AuthService } from '../auth.service';
 import { FormBuilder, FormGroup, AbstractControl, Validators, FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 function userNameValidator(control: FormControl): { [s: string]: boolean } {
   if (!control.value.match(/^a/)) {
@@ -30,7 +31,7 @@ export class LoginComponentComponent implements OnInit {
 
   baseUrl = 'http://127.0.0.1:8080/';
 
-  constructor(private authService: AuthService, private fb: FormBuilder, private httpClient: HttpClient) {
+  constructor(private authService: AuthService, private fb: FormBuilder, private httpClient: HttpClient, private router: Router) {
     this.myForm = this.fb.group(
       {
         'userName': ['', Validators.compose([Validators.required, userNameValidator])],
@@ -59,6 +60,7 @@ export class LoginComponentComponent implements OnInit {
         if (val.succ) {
           this.authService.login();
           this.myForm.valid;
+          this.router.navigate(['/management']);
         }
         else {
           alert('查无此账号');
